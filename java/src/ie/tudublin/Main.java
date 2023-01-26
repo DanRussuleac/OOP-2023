@@ -9,6 +9,11 @@ public class Main
 		Dog penny = new Dog();
 		penny.setName("Penny");
 		penny.speak();
+		Cat ginger = new Cat("ginger");
+		while (ginger.getNumLives()> 0) {
+			ginger.kill();
+		}
+
 	}
 	
 }
