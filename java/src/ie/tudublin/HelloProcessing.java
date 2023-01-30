@@ -12,7 +12,7 @@ public class HelloProcessing extends PApplet
 
 	public void setup() {
 		//colorMode(HSB);
-		background(0);
+		background(255,0,0);
 
 	
 		
@@ -23,17 +23,18 @@ public class HelloProcessing extends PApplet
 	public void draw()
 	{	
 		stroke(255); //color of line
-		line(10,10,100,100); //x1, y1, x2, y2
-		circle(300,250,70); //first two param(center of circle), third param is diameter
-		fill(60,190,0); //fill gaps between lines
-		rect(10, 300, 10, 100); //tlx, tly, width and length
-		stroke(200);
-		fill(0,140,255);
-		noStroke(); //no color for line
-		noFill(); //no more color filling
-		strokeWeight(DEFAULT_HEIGHT); //thickness of line
-		triangle(40, 90, 300, 20, 80, 70);
-		fill(255,0,255);
+		fill(255,255,96); //fill gaps between lines
+		stroke(255,255,96);
+		circle(250,250,400); //first two param(center of circle), third param is diameter
+		fill(173,216,230);
+		stroke(173,216,230);
+		triangle(400, 450, 250, 20, 80, 450);
+		fill(255);
+		stroke(255);
+		ellipse(243, 250, 150,90);
+		stroke(0,0,0);
+		fill(0,0,0);
+		circle(243, 250, 60);
 
 
 	}
