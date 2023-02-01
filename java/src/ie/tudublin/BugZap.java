@@ -2,66 +2,110 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class BugZap extends PApplet
-{
+public class BugZap extends PApplet {
+  float playerX;
+  float playerY;
+  float playerWidth;
 
-	public void settings()
-	{
-		size(500, 500);
-	}
+  // Bug variables
+  float bugX;
+  float bugY;
+  float bugSpeed;
+  boolean bugAlive;
 
-	public void setup() {
-		colorMode(HSB);
-		background(0);
+  // Score variables
+  int score;
 
-		x1 = random(0, width);
-		x2 = random(0, width);
-		y1 = random(0, height);
-		y2 = random(0, height);
+  public void settings() {
+    size(500, 500);
+  }
 
-		float range = 5;
+  public void setup() {
+    playerX = width / 2;
+    playerY = height - playerWidth;
+    playerWidth = 20;
 
-		x1dir = random(-range, range);
-		x2dir = random(-range, range);
-		y1dir = random(-range, range);
-		y2dir = random(-range, range);
+    bugX = width / 2;
+    bugY = 0;
+    bugSpeed = 2;
+    bugAlive = true;
 
-		smooth();
-		
-	}
+    score = 0;
+  }
 
-	float x1, y1, x2, y2;
-	float x1dir, x2dir, y1dir, y2dir;
-	float c = 0;
-	
-	public void draw()
-	{	
-		strokeWeight(2);
-		stroke(c, 255, 255);
-		c = (c + 1f) % 255;
-		line(x1, y1, x2, y2);
+  public void drawPlayer(float x, float y, float w) {
+    float h = w * 0.5f;
+    stroke(255);
+    line(x - w / 2, y - h / 2, x + w / 2, y + h / 2);
+    line(x - w / 2, y + h / 2, x + w / 2, y - h / 2);
+  }
 
-		x1 += x1dir;
-		x2 += x2dir;
-		y1 += y1dir;
-		y2 += y2dir;
-		
-		if (x1 < 0 || x1 > width)
-		{
-			x1dir = - x1dir;
-		}
-		if (y1 < 0 || y1 > height)
-		{
-			y1dir = - y1dir;
-		}
+  public void drawBug(float x, float y) {
+    stroke(255, 0, 0);
+    ellipse(x, y, 10, 10);
+  }
 
-		if (x2 < 0 || x2 > width)
-		{
-			x2dir = - x2dir;
-		}
-		if (y2 < 0 || y2 > height)
-		{
-			y2dir = - y2dir;
-		}
-	}
+  public void drawScore() {
+    textSize(20);
+    fill(255);
+    text("Score: " + score, width - 100, 20);
+  }
+
+  public void draw() {
+    background(0);
+    drawPlayer(playerX, playerY, playerWidth);
+
+    if (bugAlive) {
+      drawBug(bugX, bugY);
+      bugY += bugSpeed;
+
+      if (bugY + 10 >= playerY && bugX >= playerX - playerWidth / 2 && bugX <= playerX + playerWidth / 2) {
+        bugAlive = false;
+        println("Game Over");
+        if (!bugAlive) {
+          textSize(40);
+          fill(255);
+          text("Game Over!", width / 2 - 80, height / 2);
+          text("Press 'R' to restart", width / 2 - 120, height / 2 + 50);
+          if (key == 'r' || key == 'R') {
+            score = 0;
+            bugSpeed = 2;
+            loop();
+          }
+        }
+        noLoop();
+      }
+    } else {
+      bugX = random(0, width);
+      bugY = 0;
+      bugAlive = true;
+      bugSpeed += 0.2;  // increment the speed every time a bug is killed
+    }
+
+    drawScore();
+  }
+
+  public void keyPressed() {
+    if (keyCode == LEFT) {
+      playerX -= 10;
+      if (playerX - playerWidth / 2 < 0) {
+        playerX = playerWidth / 2;
+      }
+    }
+    if (keyCode == RIGHT) {
+      playerX += 10;
+      if (playerX + playerWidth / 2 > width) {
+        playerX = width - playerWidth / 2;
+      }
+    }
+    if (key == ' ') {
+      stroke(255);
+      line(playerX, playerY, playerX, 0);
+
+      if (bugAlive && bugY >= 0 && bugX >= playerX - playerWidth / 2 && bugX <= playerX + playerWidth / 2) {
+        bugAlive = false;
+        score++;
+      }
+    }
+  }
 }
