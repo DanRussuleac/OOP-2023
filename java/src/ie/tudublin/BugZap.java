@@ -21,27 +21,30 @@ public class BugZap extends PApplet {
   }
 
   public void setup() {
-    playerX = width / 2;
-    playerY = height - playerWidth;
-    playerWidth = 20;
+    playerX = width / 2; //player X is put half way along the screen
+    playerY = height - playerWidth; //player Y is put at the bottom of the screen
+    playerWidth = 20; //player Width is equal to 20
 
-    bugX = width / 2;
-    bugY = 0;
-    bugSpeed = 2;
-    bugAlive = true;
+    bugX = width / 2; //starts from middle of the screen
+    bugY = 0; //starts from top of the screen
+    bugSpeed = 2; //sets bug speed
+    bugAlive = true; //variable for if the bug is alive
 
-    score = 0;
+    score = 0; //score set to 0
   }
 
-  public void drawPlayer(float x, float y, float w) {
-    float h = w * 0.5f;
+  public void drawPlayer(float x, float y, float w) 
+  {
     stroke(255);
-    line(x - w / 2, y - h / 2, x + w / 2, y + h / 2);
-    line(x - w / 2, y + h / 2, x + w / 2, y - h / 2);
+    fill(255);
+    rectMode(CENTER);
+    rect(x,y,w-5,w-5);
+    line(x, y,x,y-15);
   }
 
   public void drawBug(float x, float y) {
     stroke(255, 0, 0);
+    fill(255,0,0);
     ellipse(x, y, 10, 10);
   }
 
@@ -79,7 +82,7 @@ public class BugZap extends PApplet {
       bugX = random(0, width);
       bugY = 0;
       bugAlive = true;
-      bugSpeed += 0.2;  // increment the speed every time a bug is killed
+      bugSpeed += 0.05;  // increment the speed every time a bug is killed
     }
 
     drawScore();
@@ -109,3 +112,5 @@ public class BugZap extends PApplet {
     }
   }
 }
+
+

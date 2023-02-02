@@ -11,10 +11,12 @@ public class Dog
 	
 	public Dog()
 	{
+		
 	}
 	
 	public Dog(String name)
 	{
+
 	}
 	
 	public void speak()
