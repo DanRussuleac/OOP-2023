@@ -15,6 +15,12 @@ public class Main
         processing.core.PApplet.runSketch( a, new BugZap());
     }
 	
+    public static void Loops()
+	{
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Loops());
+    }
+	
 	public static void main(String[] args)
 	{
 		System.out.println("Hello world");
@@ -22,8 +28,8 @@ public class Main
 		Dog penny = new Dog();
 		penny.setName("Penny");
 		penny.speak();
-
-		bugZap();
+		
+		Loops();
 	}
 	
 }
