@@ -166,6 +166,23 @@ public class Loops extends PApplet {
                     line(cx + x1, cy + y1, cx + x2, cy + y2);
                 }
             }
+            case 9:
+            {
+                
+                int numCircles = (int) mouseX / 10;
+                float cgap = 255 / (numCircles + numCircles);
+                float gap = width / (float) numCircles;
+                float w = width;
+                for(int i = numCircles ; i >= 1 ; i --)
+                {
+                    for(int j = numCircles ; j >= 1 ; j --)
+                    {
+                        float c = ((cgap * (i + j)) + offset) % 255; 
+                        fill(c, 255, 255);
+                        ellipse((gap / 2) + gap * j, (gap / 2) + gap * i, gap, gap);
+                    }
+                }
+            }
             break;
         }
     }
