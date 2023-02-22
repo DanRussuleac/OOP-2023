@@ -19,6 +19,8 @@ public class Audio1 extends PApplet
     float smoothedY = 0;
     float smoothedAmplitude = 0;
 
+    float[] samples;
+
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
 			mode = key - '0';
@@ -54,7 +56,8 @@ public class Audio1 extends PApplet
 
         y = height / 2;
         smoothedY = y;
-
+        
+        samples = new float[ab.size()];
     }
 
     float off = 0;
@@ -79,15 +82,21 @@ public class Audio1 extends PApplet
         float cx = width / 2;
         float cy = height / 2;
 
+        // Lerp each sample to the corresponding element in the samples array
+        for(int i = 0 ; i < ab.size() ; i ++)
+        {
+            samples[i] = lerp(samples[i], ab.get(i), 0.1f);
+        }
+
         switch (mode) {
 			case 0:
                 background(0);
-                for(int i = 0 ; i < ab.size() ; i ++)
+                for(int i = 0 ; i < samples.length ; i ++)
                 {
                     //float c = map(ab.get(i), -1, 1, 0, 255);
-                    float c = map(i, 0, ab.size(), 0, 255);
+                    float c = map(i, 0, samples.length, 0, 255);
                     stroke(c, 255, 255);
-                    float f = ab.get(i) * halfH;
+                    float f = samples[i] * halfH;
                     line(i, halfH + f, i, halfH - f);                    
                 }
                 break;
@@ -106,6 +115,7 @@ public class Audio1 extends PApplet
         fill(100, 255, 255);        
         
         circle(width / 2, halfH, lerpedA * 100);
+
         circle(100, y, 50);
         y += random(-10, 10);
         smoothedY = lerp(smoothedY, y, 0.1f);        
@@ -114,3 +124,4 @@ public class Audio1 extends PApplet
 
     }        
 }
+
