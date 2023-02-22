@@ -1,67 +1,63 @@
 package ie.tudublin;
 
+import ddf.minim.AudioBuffer;
+import ddf.minim.AudioInput;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 
 public class Audio1 extends PApplet
 {
+    Minim minim;
+    AudioInput ai;
+    AudioBuffer ab;
 
-	public void settings()
-	{
-		size(500, 500);
-	}
+    public void settings()
+    {
+        size(1024, 500);
+    }
 
-	public void setup() {
-		colorMode(HSB);
-		background(0);
+    int frameSize = 1024;
 
-		x1 = random(0, width);
-		x2 = random(0, width);
-		y1 = random(0, height);
-		y2 = random(0, height);
+    public void setup() {
+        colorMode(HSB);
+        background(0);
 
-		float range = 5;
+        minim = new Minim(this);
 
-		x1dir = random(-range, range);
-		x2dir = random(-range, range);
-		y1dir = random(-range, range);
-		y2dir = random(-range, range);
+        ai = minim.getLineIn(Minim.MONO, frameSize, 44100, 16);
+        ab = ai.mix;
+        
+        smooth();
+        
+    }
 
-		smooth();
-		
-	}
+    public void draw()
+    {   
+        background(0);
+        noStroke();
 
-	float x1, y1, x2, y2;
-	float x1dir, x2dir, y1dir, y2dir;
-	float c = 0;
-	
-	public void draw()
-	{	
-		strokeWeight(2);
-		stroke(c, 255, 255);
-		c = (c + 1f) % 255;
-		line(x1, y1, x2, y2);
+        float half = height / 2;
+        float cgap = 255 / (float)ab.size();
+        for(int i = 0 ; i < ab.size() ; i ++)
+        {
+            fill(cgap * i, 255, 255);
+            float x = i;
+            float y = half + ab.get(i) * half * 5;
+            float diameter = 10;
+            ellipse(x, y, diameter, diameter); 
+        }
 
-		x1 += x1dir;
-		x2 += x2dir;
-		y1 += y1dir;
-		y2 += y2dir;
-		
-		if (x1 < 0 || x1 > width)
-		{
-			x1dir = - x1dir;
-		}
-		if (y1 < 0 || y1 > height)
-		{
-			y1dir = - y1dir;
-		}
+        float average = calculateAverage();
+        System.out.println("Average: " + average);
+    }
 
-		if (x2 < 0 || x2 > width)
-		{
-			x2dir = - x2dir;
-		}
-		if (y2 < 0 || y2 > height)
-		{
-			y2dir = - y2dir;
-		}
-	}
+    private float calculateAverage() {
+        float sum = 0;
+        for (int i = 0; i < ab.size(); i++) {
+            sum += ab.get(i);
+        }
+        return sum / ab.size();
+    }
 }
+
