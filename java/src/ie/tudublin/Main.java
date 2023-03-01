@@ -30,7 +30,7 @@ public class Main
 	public static void audio1()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Audio1());
+        processing.core.PApplet.runSketch( a, new audio1());
     }
 
 	public static void audio2()
@@ -48,6 +48,11 @@ public class Main
 		penny.speak();
 
 		audio2();
+
+		PitchSpeller ps = new PitchSpeller();
+		System.out.println(ps.spell(330));
+		System.out.println(ps.spell(420));
+		System.out.println(ps.spell(1980));
 	}
 	
 }
