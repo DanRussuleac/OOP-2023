@@ -74,6 +74,7 @@ public class LifeBoard {
     }
 
     public void randomise() {
+        paused = false;
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 float dice = p.random(0, 1);
