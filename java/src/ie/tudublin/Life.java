@@ -26,6 +26,8 @@ public class Life extends PApplet {
     public void keyPressed() {
         if (key == '1') {
             board.randomise();
+        } else if (key == '2') {
+            board.clear();
         }
     }
 }

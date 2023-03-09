@@ -83,6 +83,15 @@ public class LifeBoard {
         }
     }
 
+    public void clear() {
+        paused = false;
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                board[row][col] = false;
+            }
+        }
+    }
+
     public void render() {
         for (int row = 0; row < size; row++) {
             p.stroke(255);
@@ -110,9 +119,5 @@ public class LifeBoard {
 
     public void pauseResume() {
         paused = !paused;
-    }
-
-    public boolean isPaused() {
-        return paused;
     }
 }
