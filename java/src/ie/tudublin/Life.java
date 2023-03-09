@@ -14,7 +14,7 @@ public class Life extends PApplet
 	public void setup() {
 		colorMode(RGB);
 		background(0);
-		board = new LifeBoard(50, this);
+		board = new LifeBoard(50, width, height, this);
 		board.randomise();
 	}
 
@@ -25,4 +25,13 @@ public class Life extends PApplet
 		board.applyRules();
 		
 	}
+
+	public void keyPressed() {
+		if (key == ' ') {
+		  board.pauseResume();
+		}
+	  }
+	  
 }
+
+
