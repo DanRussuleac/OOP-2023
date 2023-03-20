@@ -41,19 +41,19 @@ public class Main
 	
 	public static void main(String[] args)
 	{
-		iSystem.out.println("Hello world");
+		//iSystem.out.println("Hello world");
 		
 		Dog penny = new Dog();
 		penny.setName("Penny");
 		penny.speak();
 
-		life();
+		//life();
 
 		PitchSpeller ps = new PitchSpeller();
 		System.out.println(ps.spell(330));
 		System.out.println(ps.spell(420));
 		System.out.println(ps.spell(1980));
-		life();
+		//life();
 	}
 	
 }
