@@ -38,22 +38,10 @@ public class Main
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new Audio2());
     }
-
-	public static void audio3()
-	{
-		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Audio3());
-    }
-
-	public static void life()
-	{
-		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Life());
-    }
 	
 	public static void main(String[] args)
 	{
-		System.out.println("Hello world");
+		iSystem.out.println("Hello world");
 		
 		Dog penny = new Dog();
 		penny.setName("Penny");
@@ -65,6 +53,7 @@ public class Main
 		System.out.println(ps.spell(330));
 		System.out.println(ps.spell(420));
 		System.out.println(ps.spell(1980));
+		life();
 	}
 	
 }
